@@ -1,5 +1,5 @@
 #include <iostream>
-#include <fstream>
+#include <fstream>      // Підключення бібліотеки для роботи з файлами
 #include "my_matrix.h"
 using namespace std;
 
@@ -7,38 +7,40 @@ const int M = 20, N = 20; // Максимальні розміри матриц�
 
 // Зчитування матриці з файлу
 void get_matrix_from_file(const string& filename, int matr[M][N], int &rows, int &cols) {
-    ifstream input_file(filename);
-    if (!input_file) {
+    ifstream input_file(filename);  // Відкриття файлу для зчитування
+    if (!input_file) {  // Перевірка на успішне відкриття файлу
         cout << "Не вдалося відкрити файл для зчитування матриці.\n";
         return;
     }
-    input_file >> rows >> cols;
+    input_file >> rows >> cols; // Зчитування кількості рядків і стовпців матриці
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            input_file >> matr[i][j];
+            input_file >> matr[i][j];   // Зчитування елементів матриці
         }
     }
-    input_file.close();
+    input_file.close(); // Закриття файлу
 }
 
 // Запис матриці у файл
 void output_matrix_to_file(const string& filename, const int matr[M][N], int rows, int cols) {
-    ofstream output_file(filename);
-    if (!output_file) {
+    ofstream output_file(filename); // Відкриття файлу для запису
+    if (!output_file) { // Перевірка на успішне відкриття файлу
         cout << "Не вдалося відкрити файл для запису матриці.\n";
         return;
     }
+    // Запис елементів матриці у файл
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            output_file << matr[i][j] << " ";
+            output_file << matr[i][j] << " ";   // Запис елемента з пробілом
         }
-        output_file << endl;
+        output_file << endl;    // Перехід на новий рядок після кожного ряду
     }
-    output_file.close();
+    output_file.close();     // Закриття файлу
 }
 
 // Пошук спеціального елемента
 int find_special_element(const int matr[M][N], int rows, int cols) {
+    // Проходимо кожен елемент матриці
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             bool isMaxInRow = true, isMinInCol = true;
@@ -60,8 +62,8 @@ int find_special_element(const int matr[M][N], int rows, int cols) {
 
 // Завдання 2
 void task_2() {
-    int matr[M][N], rows, cols;
-    string filename_in, filename_out;
+    int matr[M][N], rows, cols; // Оголошення матриці та змінних для розмірів
+    string filename_in, filename_out;   // Змінні для зберігання імен файлів
 
     // Введення імен файлів
     cout << "Введіть ім'я вхідного файлу для матриці: ";
